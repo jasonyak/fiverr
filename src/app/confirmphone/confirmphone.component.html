@@ -1,0 +1,68 @@
+<my-navbar [rightButtons]="['Sign Out@/signout']"></my-navbar>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <header style="text-align: center;">
+                <h4>Please enter the verification code.</h4>
+            </header>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade in" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{errorMessage}}
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div *ngIf="invalidParameterException">
+                <div  *ngFor="let invalidParam of invalidParameterException.invalidParams">
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{invalidParam.message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form accept-charset="UTF-8" (ngSubmit)="submitVerificationCode()">
+                <div class="form-group">
+                    <input type="text" class="form-control" style="text-align:center;" required name="verificationCode" maxlength="10"
+                           placeholder="12345" id="verificationCode" [(ngModel)]="verificationCode">
+                </div>
+                <button [disabled]="isSubmitVerificationCodeDisabled()" type="submit"
+                        class="btn btn-default btn-block">Submit Code</button>
+            </form>
+
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <a class="btn btn-default btn-block" routerLink="/enterphone">Back</a>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <button [disabled]="isRequestVerificationCodeDisabled()" type="submit" (click)="requestVerificationCode()"
+                    class="btn btn-default btn-block">Send Again</button>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

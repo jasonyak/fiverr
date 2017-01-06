@@ -1,0 +1,75 @@
+<my-navbar [leftButtons]="['We\'re Hiring!@/jobs']" [rightButtons]="['FAQs@/faqs']"></my-navbar>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <header style="text-align: center;">
+                <h3>Sign up</h3>
+            </header>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade in" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{successMessage}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade in" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{errorMessage}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div *ngIf="invalidParameterException">
+                <div  *ngFor="let invalidParam of invalidParameterException.invalidParams">
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{invalidParam.message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div *ngIf="isLoading" class="loader" aria-hidden="true"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div *ngIf="!isLoading">
+                <form accept-charset="UTF-8" (ngSubmit)="registerUser()">
+                    <div class="form-group">
+                        <input type="text" placeholder="Email" class="form-control" maxlength="40"
+                               id="email" required name="email" [(ngModel)]="email">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" class="form-control" maxlength="40"
+                               id="password" required  name="password" [(ngModel)]="password">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" placeholder="Retype Password" class="form-control" maxlength="40"
+                               id="rePassword" required  name="repeatPassword" [(ngModel)]="rePassword">
+                    </div>
+                    <button [disabled]="isDisabled()" type="submit" class="btn btn-default btn-block">Sign Up</button>
+
+                    <p>By signing up, you agree to our terms of services and privacy policy.</p>
+                    <p>Already have an account? <a class="nav-link" href="#/login">Log in</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

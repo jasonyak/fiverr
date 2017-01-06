@@ -1,0 +1,203 @@
+<my-navbar [rightButtons]="['Sign Out@/signout', 'Tony Contact@/tony']"></my-navbar>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6"><h3>Profile Info</h3></div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade in" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{errorMessage}}
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="invalidParameterException">
+                <div  *ngFor="let invalidParam of invalidParameterException.invalidParams">
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{invalidParam.message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div *ngIf="isLoading" class="loader" aria-hidden="true"></div>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading" class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{email}}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td>{{phoneNumber}}</td>
+                        <td><a class="nav-link" href="#/enterphone">Change</a></td>
+                    </tr>
+                    <tr>
+                        <td>Firstname</td>
+                        <td>{{firstname}}</td>
+                        <td><a class="nav-link" href="#/profilesetup">Change</a></td>
+                    </tr>
+                    <tr>
+                        <td>Lastname</td>
+                        <td>{{lastname}}</td>
+                        <td><a class="nav-link" href="#/profilesetup">Change</a></td>
+                    </tr>
+                    <tr>
+                        <td>Country</td>
+                        <td>{{country}}</td>
+                        <td><a class="nav-link" href="#/profilesetup">Change</a></td>
+                    </tr>
+                    <tr>
+                        <td>State or Province</td>
+                        <td>{{state}}</td>
+                        <td><a class="nav-link" href="#/profilesetup">Change</a></td>
+                    </tr>
+                    <tr>
+                        <td>City</td>
+                        <td>{{city}}</td>
+                        <td><a class="nav-link" href="#/profilesetup">Change</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3>Subscription</h3>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div *ngIf="isLoading" class="loader" aria-hidden="true"></div>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading" class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>Invoice Number</th>
+                        <th>Subscription Plan</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Unsubscribe</th>
+                    </tr>
+                    <tr *ngFor="let payment of payments">
+                        <td>{{payment.paymentId}}</td>
+                        <td>{{payment.paymentType}}</td>
+                        <td>${{payment.price}}</td>
+                        <td>{{payment.paymentStatus}}</td>
+                        <td>
+                            <a href={{paypalUnsubscribeUrl}}>
+                                <img SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div *ngIf="!isLoading" class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <button type="submit" (click)="contactInfo()" class="btn btn-primary" style="float: left;">Tony's Contact Info</button>
+        </div>
+        <div class="col-md-3">
+            <button type="submit" (click)="modal.show()" class="btn btn-danger" style="float: right;">Delete Account</button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+<my-app-modal>
+    <div class="app-modal-header">
+        <h4>Are you sure you want to delete your account?</h4>
+    </div>
+    <div *ngIf="!isLoadingModal" class="app-modal-body">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div *ngIf="errorMessageModal" class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{errorMessageModal}}
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div *ngIf="invalidParameterExceptionModal">
+                    <div  *ngFor="let invalidParam of invalidParameterExceptionModal.invalidParams">
+                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{invalidParam.message}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div>
+            <h4>To stop payments, you must unsubscribe through PayPal. If you do not unsubscribe, payments will continue.</h4>
+            <br>
+
+            <div style="text-align: center;">
+                <a href={{paypalUnsubscribeUrl}}>
+                    <img SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+                </a>
+            </div>
+            <br>
+
+            <div class="item">
+                <input type="checkbox" [(ngModel)]="enableDeleteAccountButton" id="a">
+                <label for="a">I have read the above and understand.</label>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isLoadingModal" class="app-modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngIf="isLoadingModal" class="loader" aria-hidden="true"></div>
+            </div>
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-default" (click)="modal.hide()">Close</button>
+        <button type="button" class="btn btn-danger" [disabled]="!enableDeleteAccountButton" (click)="deleteAccount()">Delete Account</button>
+    </div>
+</my-app-modal>
+

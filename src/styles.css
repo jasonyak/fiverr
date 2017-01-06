@@ -1,0 +1,232 @@
+/*PHONE WRAPPER*/
+#phone-wrapper {
+  width: 310px; /* Adjust TV image width */
+  height: 633px; /* Adjust TV image height */
+  position: relative;
+}
+#phone-wrapper:after {
+  content: '';
+  display: block;
+  background: url(/assets/images/phone_frame_lighter_background.png) no-repeat top left transparent;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  /*z-index: 10;*/
+}
+#phone-wrapper video {
+  position: absolute;
+  top: 75px; /* Adjust top position */
+  left: 18px; /* Adjust left position */
+  z-index: 5;
+}
+/*PHONE WRAPPER*/
+
+/*CENTERING*/
+.center-horz {
+    /*width: 200px;*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.center-vert {
+    height: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(50%);
+}
+.center-fix {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*text-align: center;*/
+}
+/*CENTERING*/
+
+/*PAGE CENTER*/
+.outer-container {
+  position : absolute;
+  display: table;
+  width: 100%; /* This could be ANY width */
+  height: 100%; /* This could be ANY height */
+}
+
+.inner-container {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.centered-content {
+  display: inline-block;
+  text-align: center;
+}
+/*PAGE CENTER*/
+
+/*LOADER*/
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 6em;
+  height: 6em;
+}
+.loader {
+  margin: 60px auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(19,108,250, 0.2);
+  border-right: 1.1em solid rgba(19,108,250, 0.2);
+  border-bottom: 1.1em solid rgba(19,108,250, 0.2);
+  border-left: 1.1em solid #136cfa;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/*LOADER*/
+
+/*PAYPAL BLUE*/
+.deep-blue {
+    background-color: #003087 !important;
+}
+/*PAYPAL BLUE*/
+
+/*FADE IN*/
+.fade-in p {
+    margin-top: 25px;
+    font-size: 21px;
+    text-align: center;
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/*FADE IN*/
+
+/*STICKY FOOTER*/
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by its height */
+    margin: 0 auto -120px;
+    /* Pad bottom by footer height */
+    padding: 0 0 120px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+    height: 120px;
+    background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+    padding: 60px 15px 0;
+}
+.container .credit {
+    margin: 20px 0;
+}
+
+#footer > .container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+code {
+    font-size: 80%;
+}
+/*STICKY FOOTER*/
+
+/*BLOCK QUOTES*/
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+blockquote p {
+    display: inline;
+}
+/*BLOCK QUOTES*/
+
+
+
+
+

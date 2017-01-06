@@ -1,0 +1,27 @@
+<!--<div clase="container">-->
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade in" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{errorMessage}}
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="invalidParameterException">
+                <div  *ngFor="let invalidParam of invalidParameterException.invalidParams">
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{invalidParam.message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+<!--</div>-->

@@ -1,0 +1,54 @@
+<my-navbar [rightButtons]="['Sign Out@/signout', 'Profile@/profile']"></my-navbar>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade in" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{errorMessage}}
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="invalidParameterException">
+                <div  *ngFor="let invalidParam of invalidParameterException.invalidParams">
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{invalidParam.message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="isLoading" class="loader" aria-hidden="true"></div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="!isLoading && hasAccess">
+                <h4>
+                    Hello {{firstname}},<br><br>
+                    I'm super excited to meet you!<br><br>
+                    I am available anytime to help you achieve any goal or milestone. Add {{twilioNumber}} to your contacts and text me anytime!<br><br>
+                    Thank you and welcome,<br><br>
+                    Tony
+                </h4>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</div>

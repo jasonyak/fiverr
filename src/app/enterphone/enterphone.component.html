@@ -1,0 +1,57 @@
+<my-navbar [rightButtons]="['Sign Out@/signout']"></my-navbar>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <header style="text-align: center;">
+                <h4>Tony wants to chat with you! But we need your phone number first.</h4>
+                <p>Please enter your 10 digit mobile number. We will send you a text to make sure everything is working.</p>
+            </header>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade in" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{errorMessage}}
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div *ngIf="invalidParameterException">
+                <div  *ngFor="let invalidParam of invalidParameterException.invalidParams">
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{invalidParam.message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+
+            <form accept-charset="UTF-8" (ngSubmit)="submitPhoneNumber()">
+                <div class="form-group">
+                    <input class="form-control" type="text" style="text-align:center;" required [(ngModel)]="phoneNumber"
+                           placeholder="1-(555)-555-5555" id="phoneNumber" name="phoneNumber" maxlength="15">
+                </div>
+
+
+                <button [disabled]="isDisabled()" type="submit" class="btn btn-default btn-block">Submit Phone Number</button>
+            </form>
+
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

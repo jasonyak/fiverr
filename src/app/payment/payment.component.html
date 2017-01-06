@@ -1,0 +1,137 @@
+<my-navbar [rightButtons]="['Sign Out@/signout']"></my-navbar>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <header style="text-align: center;">
+                <h4>Please select your payment option.</h4>
+            </header>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade in" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{errorMessage}}
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="invalidParameterException">
+                <div  *ngFor="let invalidParam of invalidParameterException.invalidParams">
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{invalidParam.message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="isLoading" class="loader" aria-hidden="true"></div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div *ngIf="!isLoading" class="card-group">
+
+                <div class="card card-block">
+                    <h4 class="card-title">Monthly Billed - $24.99 a month</h4>
+                    <p class="card-text">Billed monthly. For individuals who want to all the Tony to help them reach their goals on a monthly basis.</p>
+
+                    <button type="submit" (click)="selectMonthlyPayments()" class="btn btn-primary">Select Monthly</button>
+                    <!--Unsubscribe monthly $18.99 USD-->
+                    <!--<a href={{paypalMonthyUnsubscribeUrl}}>-->
+                        <!--<img SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">-->
+                    <!--</a>-->
+
+                </div>
+
+                <div class="card card-block">
+                    <h4 class="card-title">Annually Billed - $18.99 a month</h4>
+                    <h4 class="card-title">32% Saving!</h4>
+                    <p class="card-text">Billed annually. For individuals who want a year with Tony, to help them reach their goals.</p>
+
+                    <button type="submit" (click)="selectAnnuallyPayments()" class="btn btn-primary">Select Annual</button>
+                    <!--Unsubscribe annual $227.88 USD-->
+                    <!--<a href={{paypalAnnuallyUnsubscribeUrl}}>-->
+                        <!--<img SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">-->
+                    <!--</a>-->
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div *ngIf="paymentTypeMonthlySelected" class="fade-in">
+                <div class="card card-block" style="text-align: center;">
+                    <h4 class="card-title">You've selected a monthly subscription.</h4>
+                    <p class="card-text">Please subscribe using PayPal. You will be directed to PayPal to complete the transaction. Once complete,
+                    we will continue your sign up process.</p>
+
+                    <form #subscribeMonthyForm action={{paypalSubscribeUrl}} method="post" target="_top">
+
+                        <input type="hidden" name="return" value={{paypalReturnUrl}}>
+                        <input type="hidden" name="notify_url" value={{paypalNotifyUrl}}>
+                        <input type="hidden" name="invoice" value={{invoiceNumber}}>
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value={{paypalHostButtonIdSubscribeMonthly}}>
+
+                        <input (click)="subscribeMonthyForm.submit()" type="image"
+                               src="/assets/images/paypal-subscribe.png" border="0"
+                               name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    </form>
+                </div>
+            </div>
+
+            <div *ngIf="paymentTypeAnnuallySelected" class="fade-in">
+                <div class="card card-block" style="text-align: center;">
+                    <h4 class="card-title">You've selected a annual subscription.</h4>
+                    <p class="card-text">Please subscribe using PayPal. You will be directed to PayPal to complete the transaction. Once complete,
+                        we will continue your sign up process.</p>
+
+                    <form #subscribeAnnuallyForm action={{paypalSubscribeUrl}} method="post" target="_top">
+
+                        <input type="hidden" name="return" value={{paypalReturnUrl}}>
+                        <input type="hidden" name="notify_url" value={{paypalNotifyUrl}}>
+                        <input type="hidden" name="invoice" value={{invoiceNumber}}>
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value={{paypalHostButtonIdSubscribeAnnually}}>
+
+                        <input (click)="subscribeAnnuallyForm.submit()" type="image"
+                               src="/assets/images/paypal-subscribe.png" border="0"
+                               name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    </form>
+                </div>
+            </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <br>
+            <!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="https://www.paypalobjects.com/webstatic/mktg/logo/bdg_payments_by_pp_2line.png" border="0" alt="Payments by PayPal"></a><div style="text-align:center"><a href="https://www.paypal.com/webapps/mpp/how-paypal-works"><font size="2" face="Arial" color="#0079CD">How PayPal Works</font></a></div></td></tr></table><!-- PayPal Logo -->
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
